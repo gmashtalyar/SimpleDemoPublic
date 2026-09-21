@@ -1,108 +1,73 @@
-# SimpleDemo
+# SimpleDemo 🚀
 
-**Transform screen recordings into interactive, step-by-step product demonstrations.**
+[![Website](https://img.shields.io/badge/Сайт-simpledemo.ru-blue?style=flat-square&logo=googlechrome&logoColor=white)](https://www.simpledemo.ru)
+[![Web App](https://img.shields.io/badge/Открыть-В_браузере-green?style=flat-square)](https://www.simpledemo.ru)
 
-SimpleDemo is a SaaS platform that captures user interactions—clicks, scrolling, typing—and converts them into guided, interactive walkthroughs. Perfect for onboarding, product demos, and documentation.
+**Превращайте записи экрана в живые интерактивные демонстрации продуктов.**
 
----
-
-## Business Logic
-
-### Core Value Proposition
-
-Traditional video tutorials are passive. Users watch, forget, and struggle to replicate steps. SimpleDemo solves this by creating **interactive demonstrations** where users click through actual interface elements, reinforcing learning through action.
-
-### Key Capabilities
-
-| Feature | Description |
-|---------|-------------|
-| **Browser Extension Recording** | Capture WebM video + JSON action logs directly from user activity |
-| **Automatic Step Extraction** | AI-powered video processing identifies click events and extracts precise screenshots |
-| **Interactive Hotspots** | Define clickable regions with descriptions, guiding users through each step |
-| **Embeddable Player** | Share demos via iframe or direct link with full interactivity |
-| **Team Collaboration** | Organization-based accounts with role-based access control |
-
-### User Workflow
-
-```
-Record → Upload → Process → Edit → Share
-   │         │         │        │       │
-   ▼         ▼         ▼        ▼       ▼
-Browser   Extension  Celery  Hotspot  Embed/
-Extension   API      Worker  Editor   Link
-```
+Забудьте о скучных пассивных видеороликах и бесконечных текстовых инструкциях со скриншотами. **[SimpleDemo](https://www.simpledemo.ru)** фиксирует ваши действия в интерфейсе и автоматически преобразует их в пошаговые интерактивные туры, в которых пользователи сами нажимают на кнопки, изучают сценарии и сразу понимают ценность вашего продукта.
 
 ---
 
-## Technical Architecture
+## 🎯 Для кого и для чего?
 
+* **Продажи (Sales & Pre-sale):** Отправляйте персонализированные интерактивные презентации вместо длинных созвонов или тяжелых PDF-презентаций. Сокращайте цикл сделки и повышайте конверсию лидов.
+* **Маркетинг продуктов (Product Marketing):** Встраивайте кликабельные демо прямо на лендинги, в блоги и email-рассылки. Дайте потенциальным клиентам «пощупать» продукт еще до регистрации.
+* **Онбординг клиентов (Customer Success):** Проводите пользователей через ключевые функции с первого дня, ускоряя время до ценности (*Time-to-Value*) и снижая отток (*Churn Rate*).
+* **Техподдержка и базы знаний:** Замените многостраничные мануалы на наглядные интерактивные руководства. Снизьте нагрузку на службу поддержки до 40%.
 
-### Tech Stack
+---
 
-| Layer | Technology | Purpose |
-|-------|------------|---------|
-| **Task Queue** | Celery 5.4 | Distributed async task processing |
-| **Message Broker** | Redis 5.0 | Task queue backend + caching |
-| **Video Processing** | FFmpeg + MoviePy | WebM→MP4 conversion, frame extraction |
-| **Monitoring** | Prometheus + Promtail | Metrics and log aggregation |
-| **Containerization** | Docker Compose | Multi-service orchestration |
+## 💻 Доступность и платформы
 
-### Data Model
+### 🛠️ Приложения для создания демо
+Записывать интерактивные сценарии легко и удобно в любой привычной среде. Приложения SimpleDemo доступны для:
+* 🪟 **Windows** (нативное настольное приложение)
+* 🍎 **macOS** (нативное настольное приложение)
+* 🌐 **Браузеры** (удобное расширение для Chrome и Chromium-браузеров)
 
-```
-┌──────────────────┐       ┌──────────────────┐
-│   Organization   │       │      User        │
-│  ────────────────│       │  ────────────────│
-│  corporate_email │◄──────│  organization_id │
-│  payment_status  │       │  role (groups)   │
-└──────────────────┘       └────────┬─────────┘
-                                    │
-                                    ▼
-┌──────────────────┐       ┌──────────────────┐
-│      Demo        │       │      Step        │
-│  ────────────────│       │  ───────────────│
-│  video_file      │◄──────│  step_type       │
-│  actions_json    │       │  order           │
-└──────────────────┘       └────────┬─────────┘
-                                    │
-              ┌─────────────────────┼─────────────────────┐
-              ▼                     ▼                     ▼
-┌──────────────────┐   ┌──────────────────┐   ┌──────────────────┐
-│   Screenshot     │   │  VideoSegment    │   │     Hotspot      │
-│  ────────────────│   │  ────────────────│   │  ───────────────│
-│  image_file      │   │  video_file      │   │  x, y coords     │
-│  timestamp       │   │  start/end       │   │  description     │
-└──────────────────┘   └──────────────────┘   └──────────────────┘
-```
+### 📱 Интерактивные демо для любых типов продуктов
+Создавайте захватывающие интерактивные руководства для:
+* 🖥️ **Десктопных приложений** (Windows, macOS)
+* 🌐 **Веб-сервисов и сайтов** (SaaS, админ-панели, порталы)
+* 📱 **Мобильных приложений** (iOS, Android — на экранах любых смартфонов и планшетов)
 
-### Video Processing Pipeline
+---
 
-The asynchronous processing pipeline transforms raw browser recordings into interactive demos:
+## ✨ Почему SimpleDemo?
 
-```python
-# 1. Extension uploads WebM + JSON action log
-├── video.webm          # Screen recording
-└── actions.json        # Click/scroll/type events with timestamps
+| ❌ Обычные видеоинструкции | ✅ Интерактивные демо SimpleDemo |
+|-----------------------------|-----------------------------------|
+| Пассивный просмотр — внимание рассеивается через 30 секунд | 100% вовлечение — пользователь сам управляет процессом |
+| Сложно повторить шаги в реальности | Закрепление навыка на практике («мышечная память») |
+| Тяжело обновлять: при изменении одной кнопки нужно переснимать всё видео | Быстрое редактирование любого шага и текста за пару кликов |
+| Нет понимания, где именно застрял зритель | Детальная аналитика прохождения каждого шага |
 
-# 2. Celery task triggered
-@shared_task
-def run_process_demo(demo_id):
-    call_command('process_demo', demo_id=demo_id)
+---
 
-# 3. FFmpeg conversion (WebM → MP4)
-ffmpeg -i input.webm -c:v libx264 -preset fast -crf 22 output.mp4
+## ⚡ Как это работает — всего 3 шага
 
-# 4. Frame extraction at click events
-for action in actions:
-    if action.type == 'click':
-        frame = video.get_frame(action.timestamp)
-        Screenshot.objects.create(image=frame, timestamp=action.timestamp)
+1. **Запись:** Запустите приложение SimpleDemo (на Windows, macOS или в браузере) и выполните нужный сценарий. Сервис автоматически зафиксирует клики, прокрутку и ввод данных.
+2. **Настройка:** Добавьте поясняющие подсказки, выделите ключевые элементы интерфейса, при необходимости скорректируйте текст и акценты.
+3. **Шеринг:** Поделитесь ссылкой или встройте демо на сайт, в базу знаний (Notion, Confluence) или документацию с помощью одного клика.
 
-# 5. Video segmentation for scroll/type actions
-for action in actions:
-    if action.type in ['scroll', 'type']:
-        segment = video.subclip(action.start, action.end)
-        VideoSegment.objects.create(video=segment)
-```
+---
 
+## 🌟 Ключевые возможности
+
+* 📍 **Интерактивные хотспоты (Hotspots):** Направляйте внимание пользователя пульсирующими метками, подсказками и всплывающими окнами.
+* 🔗 **Встраивание в 1 клик:** Легко интегрируйте интерактивный плеер через iframe или делитесь прямой ссылкой.
+* 🎨 **Брендинг:** Настраивайте цвета, шрифты и логотипы в едином стиле вашего бренда.
+* 👥 **Командная работа:** Совместное создание, согласование и управление библиотекой интерактивных демо внутри организации.
+* 📊 **Аналитика вовлеченности:** Отслеживайте, сколько людей открыли демо, до какого шага дошли и где возникли сложности.
+
+---
+
+## 📬 Готовы протестировать SimpleDemo?
+
+Сделайте первый шаг к интерактивному взаимодействию с вашими клиентами уже сегодня!
+
+👉 **Попробуйте прямо сейчас на [www.simpledemo.ru](https://www.simpledemo.ru)**
+
+Для вопросов, запроса демонстрации и раннего доступа свяжитесь с нашей командой на сайте [simpledemo.ru](https://www.simpledemo.ru).
 
